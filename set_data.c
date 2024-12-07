@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:46:12 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 16:23:58 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:25:01 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	create_forks(t_fork **head, t_params *params)
 		add_fork(head, fork, i + 1);
 		i++;
 	}
+	params->forks = *head;
 	return (0);
 }
 

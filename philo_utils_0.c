@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:54:05 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 16:24:11 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:11:35 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,10 @@ void	display_eating_messages(t_thread_list *node)
 	pthread_mutex_unlock(&node->params->display_message);
 }
 
-void	free_all(t_thread_list **head, t_params *par)
+long	get_time(long difference)
 {
-	// t_thread_list *thread;
-	t_fork *tmp;
-	(void)head;
-	// thread = *head;
-	while (par->forks)
-	{
-		pthread_mutex_destroy(&(par->forks->fork));
-		tmp = par->forks->next;
-		free(par->forks);
-		par->forks = tmp;
-	}
-	pthread_mutex_destroy(&par->display_message);
-	free(par);
-	// while (*head)
-	// {
-	// 	thread = *head;
-	// 	*head = (*head)->next;
-	// 	free(thread);
-	// }
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000) - difference);
 }

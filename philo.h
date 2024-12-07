@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:54:08 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 14:33:14 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:12:19 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct Pthread
 }					t_thread_list;
 
 int					parse_numbers(char **argv);
+long				get_time(long difference);
 void				display_eating_messages(t_thread_list *node);
 void				*case_one_thread(t_thread_list *node);
 void				ft_putstr_fd(char *str, int fd);

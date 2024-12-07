@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:00:24 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 16:26:24 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/07 19:10:45 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,23 @@ int	join_threads(t_thread_list **head)
 	return (0);
 }
 
-int initialize_mutexes(t_params *param)
+int	initialize_mutexes(t_params *param)
 {
-	t_fork *tmp;
+	t_fork	*tmp;
 
 	tmp = param->forks;
-	if(pthread_mutex_init(&(param->display_message), NULL) != 0)
-		return(-1);
-	//printf("all good\n");
-	//exit(0);
-	while(tmp)
+	if (pthread_mutex_init(&(param->display_message), NULL) != 0)
+		return (-1);
+	while (tmp)
 	{
-		printf("%d\n", tmp->index);
-		// if (pthread_mutex_init(&(tmp->fork), NULL) != 0)
-		// {
-		// 	ft_putstr_fd("failed to initialize a mutex\n", 2);
-		// 	return (-1);
-		// }
+		if (pthread_mutex_init(&(tmp->fork), NULL) != 0)
+		{
+			ft_putstr_fd("failed to initialize a mutex\n", 2);
+			return (-1);
+		}
 		tmp = tmp->next;
 	}
-	return(0);
+	return (0);
 }
 
 int	create_threads(t_thread_list **head)
@@ -83,8 +80,8 @@ int	create_threads(t_thread_list **head)
 	t_thread_list	*tmp;
 
 	tmp = *head;
-	if(initialize_mutexes((*head)->params) == 1)
-		return(-1);
+	if (initialize_mutexes((*head)->params) == 1)
+		return (-1);
 	while (tmp)
 	{
 		if (pthread_create(&(tmp->th), NULL, ft_execute, tmp) != 0)
@@ -95,14 +92,6 @@ int	create_threads(t_thread_list **head)
 		tmp = tmp->next;
 	}
 	return (join_threads(head));
-}
-
-long	get_time(long difference)
-{
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000) - difference);
 }
 
 int	check_if_died(t_thread_list *node, long started_eating)
