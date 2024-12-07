@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:54:08 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/06 22:50:23 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/07 14:33:14 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct Params
 	struct timeval	tv;
 	pthread_mutex_t	display_message;
 	t_fork			*forks;
-	pthread_mutex_t	stop_simulation;
 	int				check_if_someone_died;
 }					t_params;
 
@@ -69,9 +68,10 @@ int					ft_usleep(t_thread_list *node, long time_to_sleep,
 int					case_eating(t_thread_list *node, long *started_eating,
 						int *count_meals);
 int					case_sleeping(t_thread_list *node, long started_eating);
-void				case_thinking(t_thread_list *node, long started_eating);
+int					case_thinking(t_thread_list *node);
 long				get_time(long difference);
 int					check_if_died(t_thread_list *node, long started_eating);
 int					ft_usleep(t_thread_list *node, long time_to_sleep,
 						long started_eating);
+void				free_all(t_thread_list **head, t_params *par);
 #endif

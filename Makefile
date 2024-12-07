@@ -1,7 +1,7 @@
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Werror -Wextra 
-# CFLAGS += -fsanitize=thread
+CFLAGS += -fsanitize=address
 SRC=\
 	threads_start.c \
 	threads_utils.c \

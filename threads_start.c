@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:00:24 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/06 22:40:37 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/07 16:26:24 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	*ft_execute(void *tmp)
 			break ;
 		if (case_sleeping(node, started_eating) == 1)
 			break ;
-		case_thinking(node, started_eating);
+		if (case_thinking(node) == 1)
+			break ;
 	}
 	return (NULL);
 }
@@ -55,19 +56,37 @@ int	join_threads(t_thread_list **head)
 	return (0);
 }
 
+int initialize_mutexes(t_params *param)
+{
+	t_fork *tmp;
+
+	tmp = param->forks;
+	if(pthread_mutex_init(&(param->display_message), NULL) != 0)
+		return(-1);
+	//printf("all good\n");
+	//exit(0);
+	while(tmp)
+	{
+		printf("%d\n", tmp->index);
+		// if (pthread_mutex_init(&(tmp->fork), NULL) != 0)
+		// {
+		// 	ft_putstr_fd("failed to initialize a mutex\n", 2);
+		// 	return (-1);
+		// }
+		tmp = tmp->next;
+	}
+	return(0);
+}
+
 int	create_threads(t_thread_list **head)
 {
 	t_thread_list	*tmp;
 
 	tmp = *head;
+	if(initialize_mutexes((*head)->params) == 1)
+		return(-1);
 	while (tmp)
 	{
-		if (pthread_mutex_init(&(tmp->right_fork->fork), NULL) != 0
-			|| pthread_mutex_init(&(tmp->left_fork->fork), NULL) != 0)
-		{
-			ft_putstr_fd("failed to initialize a mutex\n", 2);
-			return (-1);
-		}
 		if (pthread_create(&(tmp->th), NULL, ft_execute, tmp) != 0)
 		{
 			ft_putstr_fd("failed thread_creation\n", 2);
