@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:46:12 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 19:25:01 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:02:10 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,14 @@ int	prepare_data(int argc, char **argv, t_params *param, t_thread_list **head)
 		param->nb_must_eat = ft_atoi(argv[5]);
 	else
 		param->nb_must_eat = -1;
+	if (param->nb_philos > INT_MAX || param->time_to_die > INT_MAX
+		|| param->time_to_eat > INT_MAX || param->time_to_sleep > INT_MAX
+		|| param->nb_must_eat > INT_MAX)
+	{
+		ft_putstr_fd("Incorrect input\n", 2);
+		free(param);
+		return (-1);
+	}
 	if (prepare_structure(head, param) == -1)
 		return (-1);
 	if (distribute_forks(head, param) == -1)

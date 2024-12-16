@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:00:24 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 19:10:45 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/16 12:54:44 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_execute(void *tmp)
 		return (NULL);
 	if (node->params->nb_philos == 1)
 		return (case_one_thread(node));
-	if (node->index % 2)
+	if (!(node->index % 2))
 		usleep(500);
 	while (1)
 	{

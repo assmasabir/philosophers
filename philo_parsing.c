@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:54:54 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/06 21:14:18 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/16 13:11:00 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	parse_all(int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 	{
-		ft_putstr_fd("unsatisfied number of arguments\n", 2);
+		ft_putstr_fd("incorrect number of arguments\n", 2);
 		return (-1);
 	}
 	else if (parse_numbers(argv) == -1)
@@ -54,9 +54,9 @@ int	parse_numbers(char **argv)
 	return (0);
 }
 
-double	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
-	double	res;
+	long	res;
 	int		i;
 
 	res = 0;

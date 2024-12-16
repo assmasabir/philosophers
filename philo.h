@@ -6,7 +6,7 @@
 /*   By: asabir <asabir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:54:08 by asabir            #+#    #+#             */
-/*   Updated: 2024/12/07 19:12:19 by asabir           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:02:35 by asabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <limits.h>
 
 typedef struct forks
 {
@@ -29,11 +30,11 @@ typedef struct forks
 
 typedef struct Params
 {
-	int				nb_philos;
-	double			time_to_die;
-	double			time_to_eat;
-	double			time_to_sleep;
-	double			nb_must_eat;
+	long			nb_philos;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			nb_must_eat;
 	struct timeval	tv;
 	pthread_mutex_t	display_message;
 	t_fork			*forks;
@@ -55,7 +56,7 @@ long				get_time(long difference);
 void				display_eating_messages(t_thread_list *node);
 void				*case_one_thread(t_thread_list *node);
 void				ft_putstr_fd(char *str, int fd);
-double				ft_atoi(char *str);
+long				ft_atoi(char *str);
 int					parse_all(int argc, char **argv);
 int					prepare_structure(t_thread_list **head, t_params *params);
 int					prepare_data(int argc, char **argv, t_params *param,
